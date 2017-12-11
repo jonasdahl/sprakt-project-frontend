@@ -1,0 +1,56 @@
+
+::selection{background-color:none; color:inherit;}
+
+.keyboard{
+  background-color: #65737e;
+  margin: 0px auto;
+  padding: 0px;
+  color: #eee;
+  max-width: 800px;
+  padding: 10px;
+}
+
+
+.key{
+  width: 8.38%; 
+  height: 40px;
+  line-height: 40px;
+  display: inline-block;
+  float: left;
+  background-color: #222;
+  text-align: center;
+  border-radius: 5px;
+  margin-left: 0.3%;
+  margin-bottom:2px;
+  cursor: pointer;
+  transition: box-shadow 0.7s ease;
+  font-size: 13px;
+}
+.key.active {
+  background: #888;
+}
+
+.function{font-size: 12px; width:5.84%; height:30px; margin-bottom:15px;}
+.small{font-size:10px; line-height:13px; text-align: center; padding:0 5px; padding-top:2px; height:28px !important;}
+.space1{margin-right: 43px !important;}
+.space2{margin-right: 25px !important;}
+.dual {font-size: 14px; line-height: 20px; width:6.25%; }
+.backspace {width: 14.4%; font-size: 12px;}
+.tab {width: 9.6%; line-height: 40px; font-size:13px;}
+.letter{width:6.25%;}
+.slash{width:11.07%;}
+.caps{width:12.00%; font-size:12px; line-height:40px;}
+.enter{width:8.55%; line-height:40px; text-align: center; padding-left:0;}
+.shift.left{width: 8.52%;line-height: 40px; font-size:13px;}
+.shift.right{width: 18.70%;line-height: 40px; font-size:13px;}
+.ctrl{width: 8.5%;}
+.space{width:38.55%;}
+.arrows{position:relative; top:42px;}
+.sec-func .key{width: 6.15%; font-size:10px; text-align:left; line-height:40px; float:left;}
+.sec-func div.dual{line-height:20px;}
+.arrows .key{text-align: center; padding-left: 7px; margin-left:2px;}
+.hidden{visibility: hidden;}
+
+.key:hover {  
+  background: #343d46;
+}
