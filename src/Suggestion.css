@@ -1,8 +1,9 @@
 .suggestion {
 	padding: 10px;
-	border-radius: 2px;
+	border-radius: 1px;
 	background: #a7adba;
 	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 	display: inline-block;
 	margin-right: 10px;
+	cursor: pointer;
 }

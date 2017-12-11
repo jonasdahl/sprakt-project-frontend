@@ -9,20 +9,33 @@ class App extends Component {
     super()
     this.state = {
       keysDown: [],
-      value: ''
+      value: '',
+      suggestions: []
     }
   }
 
   sync(keysDown, value) {
     this.setState({keysDown, value})
+
+    fetch('http:/' + '/localhost:5000/' + encodeURIComponent(value))
+      .then(res => res.json())
+      .catch(error => {})
+      .then(res => {
+        this.setState({suggestions: res})
+      })
+  }
+
+  append(str) {
+    this.sync(this.state.keysDown, this.state.value + ' ' + str)
+    this.setState({ value: this.state.value + ' ' + str })
   }
 
   render() {
     return (
       <div className="App">
         <div className="inner">
-          <Input callback={this.sync.bind(this)} />
-          <Suggestions />
+          <Input callback={this.sync.bind(this)} onChange={e => this.setState({value: e.target.value})} value={this.state.value} />
+          <Suggestions suggestions={this.state.suggestions} onSelect={this.append.bind(this)} />
           <Keyboard keysDown={this.state.keysDown} />
         </div>
       </div>

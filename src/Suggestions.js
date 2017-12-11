@@ -5,18 +5,17 @@ import Suggestion from './Suggestion.js'
 class Suggestions extends Component {
   constructor() {
   	super()
-  	this.state = {
-  		suggestions: ['test', 'testa']
-  	}
   }
 
   render() {
     return (
       <div className="suggestions">
         {
-        	this.state.suggestions.map(s => (
-        		<Suggestion value={s} />
+        	this.props.suggestions && this.props.suggestions.length > 0 ?
+          this.props.suggestions.map(s => (
+        		<Suggestion value={s[0]} onSelect={this.props.onSelect ? e => this.props.onSelect(s[0]) : {}} />
         	))
+          : 'No suggestions available'
         }
         <div className="clear"></div>
       </div>

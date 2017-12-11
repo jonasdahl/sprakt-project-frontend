@@ -8,7 +8,7 @@ class Suggestion extends Component {
 
   render() {
     return (
-      <div className="suggestion">
+      <div className="suggestion" onClick={this.props.onSelect ? this.props.onSelect : {}}>
         { this.props.value }
       </div>
     );
