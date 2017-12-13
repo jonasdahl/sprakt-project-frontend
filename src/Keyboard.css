@@ -1,5 +1,5 @@
 
-::selection{background-color:none; color:inherit;}
+.keyboard ::selection{background-color:none; color:inherit;}
 
 .keyboard{
   background-color: #65737e;
@@ -12,7 +12,7 @@
 
 
 .key{
-  width: 8.38%; 
+  width: 8.38%;
   height: 40px;
   line-height: 40px;
   display: inline-block;
@@ -51,6 +51,6 @@
 .arrows .key{text-align: center; padding-left: 7px; margin-left:2px;}
 .hidden{visibility: hidden;}
 
-.key:hover {  
+.key:hover {
   background: #343d46;
 }

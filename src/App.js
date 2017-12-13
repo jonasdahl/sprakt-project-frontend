@@ -14,11 +14,11 @@ class App extends Component {
     }
   }
 
-  sync(keysDown, value) {
+  sync = (keysDown, value, e) => {
     this.setState({keysDown, value})
 
     if (value.length > 0) {
-      fetch('http:/' + '/localhost:5000/suggest/' + encodeURIComponent(value))
+      fetch('http://localhost:5000/suggest/' + encodeURIComponent(value))
         .then(res => res.json())
         .catch(error => {})
         .then(res => {
@@ -28,7 +28,7 @@ class App extends Component {
 
     const words = value.split(' ')
     if (false && words.length > 0 && words[words.length - 1].length > 0) {
-      fetch('http:/' + '/localhost:5000/autocorrect/' + encodeURIComponent(words[words.length - 1]))
+      fetch('http://localhost:5000/autocorrect/' + encodeURIComponent(words[words.length - 1]))
         .then(res => res.json())
         .catch(error => {})
         .then(res => {
@@ -36,42 +36,66 @@ class App extends Component {
           this.setState({corrections: res})
         })
     }
+
+    if (e && e.type === 'keydown' && e.keyCode === 9 && this.state.suggestions.length) {
+      e.preventDefault()
+      e.stopPropagation()
+      this.append(this.state.suggestions[0][0])({})
+    }
   }
 
-  append(str, e) {
-    const val = this.state.value.split(' ').slice(0,-1).join(' ') + ' ' + str + ' '
-    this.sync(this.state.keysDown, val)
+  append = str => e => {
+    const space = this.state.value.split(' ').length === 1 ? '' : ' '
+    const val = this.state.value.split(' ').slice(0,-1).join(' ') + space + str + ' '
+    this.sync(this.state.keysDown, val, e)
     this.setState({value: val})
     if (this.ref) this.ref.focus()
   }
 
-  correct(str, e) {
+  correct = str => e => {
     const val = this.state.value.split(' ').slice(0,-1).join(' ') + ' ' + str
-    this.sync(this.state.keysDown, val)
+    this.sync(this.state.keysDown, val, e)
     this.setState({value: val})
     if (this.ref) this.ref.focus()
   }
 
-  keyPressed(letter, type) {
+  keyPressed = (letter, type, e) => {
     if (type) {
-      if (type == 'backspace' && this.state.value.length() > 0) {
-        this.setState({value: this.state.value.slice(0,-1)})
+      if (type === 'backspace' && this.state.value.length() > 0) {
+        this.sync(this.state.keysDown, this.state.value.slice(0, -1), e)
+      } else if (type === 'tab') {
+        this.append(this.state.suggestions[0][0])(e)
       }
     } else {
-      this.setState({value: this.state.value + letter})
+      this.sync(this.state.keysDown, this.state.value + letter, e)
     }
     if (this.ref) this.ref.focus()
   }
 
   render() {
-    console.log(this.state.keysDown)
     return (
       <div className="App">
         <div className="inner">
-          <Input inputRef={ref => this.ref = ref} callback={this.sync.bind(this)} onChange={e => this.setState({value: e.target.value})} value={this.state.value} />
-          <Suggestions suggestions={this.state.corrections} title="corrections" onSelect={this.correct.bind(this)} />
-          <Suggestions suggestions={this.state.suggestions} title="suggestions" onSelect={this.append.bind(this)} />
-          <Keyboard keysDown={this.state.keysDown} onKeyPress={this.keyPressed.bind(this)} />
+          <Input
+            inputRef={ref => this.ref = ref}
+            callback={this.sync}
+            onChange={e => this.setState({value: e.target.value})}
+            value={this.state.value}
+            />
+          <Suggestions
+            suggestions={this.state.corrections}
+            title="corrections"
+            onSelect={this.correct}
+            />
+          <Suggestions
+            suggestions={this.state.suggestions}
+            title="suggestions"
+            onSelect={this.append}
+            />
+          <Keyboard
+            keysDown={this.state.keysDown}
+            onKeyPress={this.keyPressed}
+            />
         </div>
       </div>
     );

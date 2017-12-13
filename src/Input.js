@@ -10,45 +10,40 @@ class Input extends Component {
   }
 
   keyDown(e) {
-    const l = this.state.keysDown
-    l.push(e.keyCode)
-    this.setState({
-      keysDown: l,
-    })
+    console.log('key down', e.keyCode)
+    const keysDown = [e.keyCode, ...this.state.keysDown]
+    this.setState({ keysDown })
     if (this.props.callback) {
-      this.props.callback(this.state.keysDown, e.target.value)
+      this.props.callback(keysDown, e.target.value, e)
     }
   }
 
   keyUp(e) {
-    console.log(e.target.value)
-    const l = this.state.keysDown
-    let idx = l.indexOf(e.keyCode)
-    while (idx > -1) {
-      l.splice(idx, 1)
-      idx = l.indexOf(e.keyCode)
-    }
-    this.setState({
-      keysDown: l,
-    })
+    const keysDown = this.state.keysDown.filter(i => i !== e.keyCode)
+    this.setState({ keysDown })
     if (this.props.callback) {
-      this.props.callback(this.state.keysDown, e.target.value)
+      this.props.callback(keysDown, e.target.value, e)
     }
   }
 
   keyUpAll(e) {
-    this.setState({
-      keysDown: [],
-    })
+    this.setState({ keysDown: [] })
     if (this.props.callback) {
-      this.props.callback(this.state.keysDown, e.target.value)
+      this.props.callback([], e.target.value, e)
     }
   }
 
   render() {
     return (
       <div className="input">
-        <input type="text" value={this.props.value} ref={this.props.inputRef} onChange={this.props.onChange ? this.props.onChange : {}} onKeyDown={this.keyDown.bind(this)} onKeyUp={this.keyUp.bind(this)} onBlur={this.keyUpAll.bind(this)} />
+        <input type="text"
+          value={this.props.value}
+          ref={this.props.inputRef}
+          onChange={this.props.onChange ? this.props.onChange : {}}
+          onKeyDown={this.keyDown.bind(this)}
+          onKeyUp={this.keyUp.bind(this)}
+          onBlur={this.keyUpAll.bind(this)}
+        />
         <div className="clear"></div>
       </div>
     );

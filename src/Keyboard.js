@@ -55,9 +55,7 @@ class Keyboard extends Component {
           <KeyboardLetter text="Backspace" {...this.props} code={8} type="backspace" />
 
 
-          <div className="key tab">
-            Tab
-          </div>
+          <KeyboardLetter text="Tab" {...this.props} code={9} type="tab" />
 
           <KeyboardLetter letter="Q" {...this.props} />
           <KeyboardLetter letter="W" {...this.props} />
@@ -112,12 +110,12 @@ class Keyboard extends Component {
           </div>
           <KeyboardLetter text="Shift" {...this.props} code={16} type="shift right" />
           <KeyboardLetter text="Fn" {...this.props} code={-1} type="" />
-          <KeyboardLetter text="Control" {...this.props} code={17} type="" />
-          <KeyboardLetter text="Option" {...this.props} code={18} type="" />
+          <KeyboardLetter text="Control" {...this.props} code={17} type="control" />
+          <KeyboardLetter text="Option" {...this.props} code={18} type="option" />
           <KeyboardLetter text="Command" {...this.props} code={91} type="ctrl" />
           <KeyboardLetter letter=" " text="" {...this.props} code={32} type="space" />
-          <KeyboardLetter text="Command" {...this.props} code={93} type="ctrl" />
-          <KeyboardLetter text="Alt" {...this.props} code={18} type="" />
+          <KeyboardLetter text="Command" {...this.props} code={93} type="ctrl right" />
+          <KeyboardLetter text="Alt" {...this.props} code={18} type="alt right" />
           <div className="key"></div>
           <div className="key"></div>
         </div>

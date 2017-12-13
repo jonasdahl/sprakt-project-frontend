@@ -7,28 +7,30 @@ class KeyboardLetter extends Component {
     this.state = {}
   }
 
-  click() {
+  click(e) {
     if (this.props.type) {
-      this.props.onKeyPress(this.props.letter, this.props.type)
+      this.props.onKeyPress(this.props.letter, this.props.type, e)
     } else {
-      this.props.onKeyPress(this.props.keysDown.includes(20) ? this.props.letter : this.props.letter.toLowerCase())
+      this.props.onKeyPress(this.props.keysDown.includes(20) ? this.props.letter : this.props.letter.toLowerCase(), null, e)
     }
   }
 
   render() {
     let code = 0, type = 'letter'
     if (this.props.letter) {
-      code = this.props.letter.charCodeAt(0)
       switch (code) {
         case 'Å'.charCodeAt(0):
           code = 219
-          break;
+          break
         case 'Ä'.charCodeAt(0):
           code = 222
-          break;
+          break
         case 'Ö'.charCodeAt(0):
           code = 186
-          break;
+          break
+        default:
+          code = this.props.letter.charCodeAt(0)
+          break
       }
     } else if (this.props.code) {
       code = this.props.code
@@ -37,9 +39,17 @@ class KeyboardLetter extends Component {
     if (this.props.type) {
       type = this.props.type
     }
+
     return (
-      <div className={ this.props.keysDown.includes(code) ? 'key ' + type + ' active' : 'key ' + type } onClick={this.click.bind(this)}>
-        { this.props.text ? this.props.text : this.props.keysDown.includes(20) ? this.props.letter : this.props.letter.toLowerCase() }
+      <div
+        className={this.props.keysDown.includes(code) ? `key ${type} active` : `key ${type}` }
+        onClick={this.click.bind(this)}>
+        {
+          this.props.text ?
+            this.props.text
+            : this.props.keysDown.includes(20) ?
+              this.props.letter
+              : this.props.letter.toLowerCase() }
       </div>
     );
   }
