@@ -7,6 +7,14 @@ class KeyboardLetter extends Component {
     this.state = {}
   }
 
+  click() {
+    if (this.props.type) {
+      this.props.onKeyPress(this.props.letter, this.props.type)
+    } else {
+      this.props.onKeyPress(this.props.keysDown.includes(20) ? this.props.letter : this.props.letter.toLowerCase())
+    }
+  }
+
   render() {
     let code = 0, type = 'letter'
     if (this.props.letter) {
@@ -30,8 +38,8 @@ class KeyboardLetter extends Component {
       type = this.props.type
     }
     return (
-      <div className={ this.props.keysDown.indexOf(code) > -1 ? 'key ' + type + ' active' : 'key ' + type }>
-        { this.props.letter || this.props.text }
+      <div className={ this.props.keysDown.includes(code) ? 'key ' + type + ' active' : 'key ' + type } onClick={this.click.bind(this)}>
+        { this.props.text ? this.props.text : this.props.keysDown.includes(20) ? this.props.letter : this.props.letter.toLowerCase() }
       </div>
     );
   }

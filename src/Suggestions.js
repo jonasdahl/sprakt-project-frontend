@@ -13,9 +13,9 @@ class Suggestions extends Component {
         {
         	this.props.suggestions && this.props.suggestions.length > 0 ?
           this.props.suggestions.map(s => (
-        		<Suggestion value={s[0]} onSelect={this.props.onSelect ? e => this.props.onSelect(s[0]) : {}} />
+        		<Suggestion key={s[0]} value={s[0]} onSelect={this.props.onSelect ? e => this.props.onSelect(s[0], e) : {}} />
         	))
-          : 'No suggestions available'
+          : 'No ' + this.props.title + ' available'
         }
         <div className="clear"></div>
       </div>

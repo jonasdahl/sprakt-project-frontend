@@ -48,7 +48,7 @@ class Input extends Component {
   render() {
     return (
       <div className="input">
-        <input type="text" value={this.props.value} onChange={this.props.onChange ? this.props.onChange : {}} onKeyDown={this.keyDown.bind(this)} onKeyUp={this.keyUp.bind(this)} onBlur={this.keyUpAll.bind(this)} />
+        <input type="text" value={this.props.value} ref={this.props.inputRef} onChange={this.props.onChange ? this.props.onChange : {}} onKeyDown={this.keyDown.bind(this)} onKeyUp={this.keyUp.bind(this)} onBlur={this.keyUpAll.bind(this)} />
         <div className="clear"></div>
       </div>
     );
