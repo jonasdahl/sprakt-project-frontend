@@ -14,10 +14,14 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.sync([], '')
+  }
+
   sync = (keysDown, value, e) => {
     this.setState({keysDown, value})
 
-    if (value.length > 0) {
+    if (value) {
       fetch('http://localhost:5000/suggest/' + encodeURIComponent(value))
         .then(res => res.json())
         .catch(error => {})
@@ -27,7 +31,7 @@ class App extends Component {
     }
 
     const words = value.split(' ')
-    if (false && words.length > 0 && words[words.length - 1].length > 0) {
+    if (words.length > 0 && words[words.length - 1].length > 0) {
       fetch('http://localhost:5000/autocorrect/' + encodeURIComponent(words[words.length - 1]))
         .then(res => res.json())
         .catch(error => {})
@@ -49,14 +53,14 @@ class App extends Component {
     const val = this.state.value.split(' ').slice(0,-1).join(' ') + space + str + ' '
     this.sync(this.state.keysDown, val, e)
     this.setState({value: val})
-    if (this.ref) this.ref.focus()
+    document.getElementById('textarea').focus()
   }
 
   correct = str => e => {
     const val = this.state.value.split(' ').slice(0,-1).join(' ') + ' ' + str
     this.sync(this.state.keysDown, val, e)
     this.setState({value: val})
-    if (this.ref) this.ref.focus()
+    document.getElementById('textarea').focus()
   }
 
   keyPressed = (letter, type, e) => {
@@ -69,7 +73,7 @@ class App extends Component {
     } else {
       this.sync(this.state.keysDown, this.state.value + letter, e)
     }
-    if (this.ref) this.ref.focus()
+    document.getElementById('textarea').focus()
   }
 
   render() {
@@ -81,11 +85,6 @@ class App extends Component {
             callback={this.sync}
             onChange={e => this.setState({value: e.target.value})}
             value={this.state.value}
-            />
-          <Suggestions
-            suggestions={this.state.corrections}
-            title="corrections"
-            onSelect={this.correct}
             />
           <Suggestions
             suggestions={this.state.suggestions}

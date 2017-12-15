@@ -4,8 +4,13 @@
   "private": true,
   "dependencies": {
     "react": "^16.2.0",
+    "react-autogrow-textarea": "^0.1.0",
+    "react-autoheight-textarea": "^1.0.4",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
+    "react-flexi-textarea": "^1.0.6",
+    "react-scripts": "1.0.17",
+    "react-textarea-autoheight": "^1.0.0",
+    "react-textarea-autosize": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",

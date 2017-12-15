@@ -3,9 +3,14 @@
 	margin: 0 auto;
 	padding: 10px;
 	background: #e0e5ee;
+	height: 60px;
+	line-height: 40px;
+	overflow: hidden;
 }
 
 .suggestion {
+	line-height: 20px;
+	height: 40px;
 	padding: 10px;
 	border-radius: 1px;
 	background: #a7adba;
@@ -13,6 +18,7 @@
 	display: inline-block;
 	margin-right: 10px;
 	cursor: pointer;
+	margin-bottom: 20px;
 }
 
 .suggestion:hover {

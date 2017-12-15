@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Input.css';
+import Textarea from 'react-flexi-textarea'
 
 class Input extends Component {
   constructor() {
@@ -36,7 +37,8 @@ class Input extends Component {
   render() {
     return (
       <div className="input">
-        <input type="text"
+        <Textarea
+          id="textarea"
           value={this.props.value}
           ref={this.props.inputRef}
           onChange={this.props.onChange ? this.props.onChange : {}}

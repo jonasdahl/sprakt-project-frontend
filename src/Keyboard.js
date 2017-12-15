@@ -116,8 +116,7 @@ class Keyboard extends Component {
           <KeyboardLetter letter=" " text="" {...this.props} code={32} type="space" />
           <KeyboardLetter text="Command" {...this.props} code={93} type="ctrl right" />
           <KeyboardLetter text="Alt" {...this.props} code={18} type="alt right" />
-          <div className="key"></div>
-          <div className="key"></div>
+          <div className="key last"></div>
         </div>
         <div className="clear"></div>
       </div>
